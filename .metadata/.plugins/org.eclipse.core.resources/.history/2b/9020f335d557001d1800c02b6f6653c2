@@ -1,0 +1,5 @@
+package livraria.jdbc;
+
+public class TestaConexao {
+
+}

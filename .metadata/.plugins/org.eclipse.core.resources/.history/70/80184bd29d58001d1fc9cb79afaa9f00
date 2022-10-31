@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Cadastrar Livro</title>
+</head>
+<body>
+	<form action="CadastrarLivro" method="POST">
+		<label>Cód. Livro: </label><br/>
+		<input type="number" name="codlivro"/><br/>
+		<label>Titulo:</label><br/>
+		<input type="text" name="titulo"/><br/>
+		<label>Autor:</label><br/>
+		<input type="text" name="autor"/><br/>
+		<label>Categoria:</label><br/>
+		out.println("<label for='categorias'>Categorias</label>");
+			<select name='categorias' id='categorias'>
+			<option value='Selecione' disabled selected>Selecione a Categoria</option>
+			<option value='1'>Arquitetura</option>
+			<option value='2'>Desgin</option>
+			<option value='3'>Informática</option>
+			<option value='4'>Literatura brasileira</option>
+			<option value='5'>Literatura infantil</option>
+			<option value='6'>Literatura universal</option>
+			<option value='7'>Música e arte</option>
+			</select>");
+		<label>Valor:</label><br/>
+		<input type="number" name="valor"/><br/>
+		<input type="submit" value="Gravar"/>
+		</form>
+</body>
+</html>

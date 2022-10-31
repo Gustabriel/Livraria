@@ -1,0 +1,8 @@
+package livraria.jdbc;
+
+public class TbLivros {
+	private int codlivro;
+	private String titulo;
+	private String autor;
+	private String categoria;
+}

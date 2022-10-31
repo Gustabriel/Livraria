@@ -1,0 +1,20 @@
+package livraria.jdbc;
+
+import java.util.List;
+
+public class TestaLista {
+	//Rodar com Java Aplication
+	public static void main(String[] args) {
+		ContatoDao4 dao = new ContatoDao4();
+		
+		List<Contato3> contatos = dao.getLista();
+		for(Contato3 contato : contatos) {
+			System.out.println("Nome: " + contato.getNome());
+			System.out.println("Email: " + contato.getEmail());
+			System.out.println("Endereço: " + contato.getEndereco());
+			System.out.println("Data de Nascimento: " + contato.getDataNascimento().getTime());
+		}
+
+	}
+
+}

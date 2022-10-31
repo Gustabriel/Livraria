@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<h2>Lista de Livros</h2>
+		<form action="ListaCategoria" method="POST">
+		<input type="submit" value="Listar"/>
+		</form>
+</body>
+</html>

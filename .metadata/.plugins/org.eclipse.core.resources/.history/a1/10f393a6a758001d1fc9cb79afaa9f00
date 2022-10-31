@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+
+<body>
+	<form action="atualizar" method="POST">
+		<label>Id Obrigatório: </label>
+		<input type="number" required="required" name="id"/>
+		<label>Nome: </label><br/>
+		<input type="text" name="nome"/><br/>
+		<label>E-mail:</label><br/>
+		<input type="text" name="email"/><br/>
+		<label>Endereço:</label><br/>
+		<input type="text" name="endereco"/><br/>
+		<label>Data de Nascimento:</label><br/>
+		<input type="text" name="dataNascimento"/><br/>
+		<input type="submit" value="Atualizar"/>
+		</form>
+</body>
+</html>

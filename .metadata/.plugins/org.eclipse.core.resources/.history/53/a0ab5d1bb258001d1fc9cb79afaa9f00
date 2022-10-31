@@ -1,0 +1,122 @@
+package livraria.jdbc;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class TbLivrosDAO {
+	
+	private static Connection connection;
+	
+	public TbLivrosDAO() {
+		// utilizar a classe ConnectionFactory para criar a conexão
+		try {
+			TbLivrosDAO.connection = new ConnectionFactory().getConnection();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+
+	//Método INSERT
+	public void adicionar(TbLivros tblivros) {
+		// o ponto de interrogação é uma mascara para variavel
+		String sql = "insert into tblivros " + "(codlivro, titulo, autor, categoria, valor)" + " values(?,?,?,?,?)";
+		try {
+			PreparedStatement stmt = connection.prepareStatement(sql);
+			// setar os valores
+			stmt.setInt(   1, tblivros.getCodlivro());
+			stmt.setString(2, tblivros.getTitulo());
+			stmt.setString(3, tblivros.getAutor());
+			stmt.setString(4, tblivros.getCategoria());
+			stmt.setFloat( 5, tblivros.getValor());
+			stmt.execute();
+			stmt.close();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	
+	
+	
+	//Método SELECT
+	 public List<TbLivros> getLista() {
+		try {
+			List<TbLivros> tblivro = new ArrayList<TbLivros>();
+			PreparedStatement stmt = TbLivrosDAO.connection.prepareStatement("select * from tblivros");
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				TbLivros tblivros = new TbLivros();
+				tblivros.setCodlivro(rs.getInt("codlivro"));
+				tblivros.setTitulo(rs.getString("titulo"));
+				tblivros.setAutor(rs.getString("autor"));
+				tblivros.setCategoria(rs.getString("categoria"));
+				tblivros.setValor(rs.getFloat("valor"));
+				tblivro.add(tblivros);
+			}
+			rs.close();
+			stmt.close();
+			return tblivro;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	 
+	 public List<TbLivros> getLista2() {
+			try {
+				List<TbLivros> tblivro = new ArrayList<TbLivros>();
+				PreparedStatement stmt = TbLivrosDAO.connection.prepareStatement("select * from tblivros where categoria?");
+				ResultSet rs = stmt.executeQuery();
+				while (rs.next()) {
+					TbLivros tblivros = new TbLivros();
+					tblivros.setCodlivro(rs.getInt("codlivro"));
+					tblivros.setTitulo(rs.getString("titulo"));
+					tblivros.setAutor(rs.getString("autor"));
+					tblivros.setCategoria(rs.getString("categoria"));
+					tblivros.setValor(rs.getFloat("valor"));
+					tblivro.add(tblivros);
+				}
+				rs.close();
+				stmt.close();
+				return tblivro;
+			} catch (SQLException e) {
+				throw new RuntimeException(e);
+			}
+		}
+	 
+	 public void remover(TbLivros tblivros) {
+			// o ponto de interrogação é uma mascara para variavel
+			String sql = "delete from tblivros where codlivro=?";
+			try {
+				PreparedStatement stmt = connection.prepareStatement(sql);
+				// setar os valores
+				stmt.setLong(1, tblivros.getCodlivro());
+				stmt.execute();
+				stmt.close();
+			} catch (SQLException e) {
+				throw new RuntimeException(e);
+			}
+		}
+
+	 public void alterar(TbLivros tblivros) {
+			// o ponto de interrogação é uma mascara para variavel codlivro, titulo, autor, categoria, valor
+			String sql = "update tblivros set titulo=?, autor=?, categoria=?, valor=? where codlivro=?";
+			try {
+				PreparedStatement stmt = connection.prepareStatement(sql);
+				// setar os valores
+				stmt.setInt(   1, tblivros.getCodlivro());
+				stmt.setString(2, tblivros.getTitulo());
+				stmt.setString(3, tblivros.getAutor());
+				stmt.setString(4, tblivros.getCategoria());
+				stmt.setFloat( 5, tblivros.getValor());
+				stmt.execute();
+				stmt.close();
+			} catch (SQLException e) {
+				throw new RuntimeException(e);
+			}
+		}
+
+}

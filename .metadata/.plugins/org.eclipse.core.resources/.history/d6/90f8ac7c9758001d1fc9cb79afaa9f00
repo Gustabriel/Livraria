@@ -1,0 +1,62 @@
+package servlets;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class ListaLivrosPorCategoria
+ */
+@WebServlet("/ListaLivrosPorCategoria")
+public class ListaLivrosPorCategoria extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
+		String select = "";
+		
+		String selecionado = "2";
+		
+		PrintWriter out = response.getWriter();
+		out.println("<!DOCTYPE html>");
+		out.println("<html>");
+			out.println("<head>");
+			out.println("<title>Livraria FGE</title>");
+			out.println("</head>");
+			out.println("<body>");
+				out.println("<h1>Listar Livros Por Categoria</h1>");
+				out.println("<br/>");
+				out.println("<form action=" + selecionado + "method='GET'>");
+					out.println("Categorias");
+					out.println("<select name='categorias'>");
+					out.println("<option value='Selecione' disabled selected>Selecione a Categoria</option>");
+					out.println("<option value='1'>Arquitetura</option>");
+					out.println("<option value='2'>Desgin</option>");
+					out.println("<option value='3'>Informática</option>");
+					out.println("<option value='4'>Literatura brasileira</option>");
+					out.println("<option value='5'>Literatura infantil</option>");
+					out.println("<option value='6'>Literatura universal</option>");
+					out.println("<option value='7'>Música e arte</option>");
+					out.println("</select>");
+					out.println("<br/>");
+					out.println("<br/>");
+					out.println("<input type='submit' value='Listar'>");
+				out.println("</form>");
+			out.println("</body>");
+		out.println("</html>");
+	}
+	
+
+	
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	}
+
+}

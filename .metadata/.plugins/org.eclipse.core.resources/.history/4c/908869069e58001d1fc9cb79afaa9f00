@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Cadastrar Livro</title>
+</head>
+<body>
+	<form action="CadastrarLivro" method="POST">
+		<label>Cód. Livro: </label><br/>
+		<input type="number" name="codlivro"/><br/>
+		<label>Titulo:</label><br/>
+		<input type="text" name="titulo"/><br/>
+		<label>Autor:</label><br/>
+		<input type="text" name="autor"/><br/>
+		<label>Categoria:</label><br/>
+		<label for='categorias'>Categorias</label>
+			<select name='categorias' id='categorias'>
+				<option name='categorias' id='categorias' value='Selecione' disabled selected>Selecione a Categoria</option>
+				<option name='categorias' id='categorias' value='Arquitetura'>Arquitetura</option>
+				<option name='categorias' id='categorias' value='Desgin'>Desgin</option>
+				<option name='categorias' id='categorias' value='Informática'>Informática</option>
+				<option name='categorias' id='categorias' value='Literatura brasileira'>Literatura brasileira</option>
+				<option name='categorias' id='categorias' value='Literatura infantil'>Literatura infantil</option>
+				<option name='categorias' id='categorias' value='Literatura universal'>Literatura universal</option>
+				<option name='categorias' id='categorias' value='Música e arte'>Música e arte</option>
+			</select>");
+		<label>Valor:</label><br/>
+		<input type="number" name="valor"/><br/>
+		<input type="submit" value="Gravar"/>
+		</form>
+</body>
+</html>

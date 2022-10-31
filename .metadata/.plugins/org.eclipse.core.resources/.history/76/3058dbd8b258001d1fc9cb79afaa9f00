@@ -1,0 +1,107 @@
+package servlets;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import livraria.jdbc.TbLivros;
+import livraria.jdbc.TbLivrosDAO;
+
+@WebServlet("/ListaCategoria")
+public class ListaCategoria extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+    public ListaCategoria() {
+        super();
+    }
+
+
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		TbLivrosDAO dao = new TbLivrosDAO();
+		PrintWriter out = response.getWriter();
+		
+		List<TbLivros> livros = dao.getLista2();
+				try {
+					List<TbLivros> tblivro = new ArrayList<TbLivros>();
+					PreparedStatement stmt = TbLivrosDAO.connection.prepareStatement("select * from tblivros where categoria=?");
+					ResultSet rs = stmt.executeQuery();
+					while (rs.next()) {
+						TbLivros tblivros = new TbLivros();
+						tblivros.setCodlivro(rs.getInt("codlivro"));
+						tblivros.setTitulo(rs.getString("titulo"));
+						tblivros.setAutor(rs.getString("autor"));
+						tblivros.setCategoria(rs.getString("categoria"));
+						tblivros.setValor(rs.getFloat("valor"));
+						tblivro.add(tblivros);
+						out.println("Código: " + livro.getCodlivro());
+						out.println("Titulo: " + livro.getTitulo());
+						out.println("Autor: " + livro.getAutor());
+						out.println("Categoria: " + livro.getCategoria());
+						out.println("Valor: R$" + livro.getValor());
+						out.println("----------------------------------------------------");
+					}
+					rs.close();
+					stmt.close();
+					return;
+				} catch (SQLException e) {
+					throw new RuntimeException(e);
+				}
+			}
+		 
+
+		
+		List<TbLivros> livros = dao.getLista2();
+		String categorias = (request.getParameter("categoria"));
+		for(TbLivros livro : livros) {
+			if(livro.getCategoria() == categorias) {
+			out.println("Código: " + livro.getCodlivro());
+			out.println("Titulo: " + livro.getTitulo());
+			out.println("Autor: " + livro.getAutor());
+			out.println("Categoria: " + livro.getCategoria());
+			out.println("Valor: R$" + livro.getValor());
+			out.println("----------------------------------------------------");
+			}
+		} 
+		
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

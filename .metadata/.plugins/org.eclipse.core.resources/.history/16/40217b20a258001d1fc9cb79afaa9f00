@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<form action="ExcluirLivro" method="POST">
+		<label>Id Obrigatório: </label>
+		<input type="number" required="required" name="id"/>
+		<input type="submit" value="Apagar"/>
+		</form>
+</body>
+</html>

@@ -1,0 +1,17 @@
+package livraria.jdbc;
+
+import java.util.List;
+
+public class TestaLista {
+	//Rodar com Java Aplication
+	public static void main(String[] args) {
+		TbCategoriaDAO dao = new TbCategoriaDAO();
+		
+		List<TbCategoria> tbcategorias = dao.getLista();
+		for(TbCategoria tbcategoria : tbcategorias) {
+			System.out.println("Categoria: " + tbcategoria.getCategoria());
+		}
+
+	}
+
+}

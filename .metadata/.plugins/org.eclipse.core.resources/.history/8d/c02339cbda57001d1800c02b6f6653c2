@@ -1,0 +1,17 @@
+package livraria.jdbc;
+
+import java.sql.Connection;
+
+public class TbCategoriaDAO {
+	
+	private Connection connection;
+	
+	public TbCategoriaDAO() {
+		// utilizar a classe ConnectionFactory para criar a conexão
+		try {
+			this.connection = new ConnectionFactory().getConnection();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+}

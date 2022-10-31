@@ -1,0 +1,103 @@
+package livraria.jdbc;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class TbLivrosDAO {
+	
+	private Connection connection;
+	
+	public TbLivrosDAO() {
+		// utilizar a classe ConnectionFactory para criar a conexão
+		try {
+			this.connection = new ConnectionFactory().getConnection();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+
+	//Método INSERT
+	public void adicionar(TbLivros tblivros) {
+		// o ponto de interrogação é uma mascara para variavel
+		String sql = "insert into tblivros " + "(codlivro, titulo, autor, categoria, valor)" + " values(?,?,?,?,?)";
+		try {
+			PreparedStatement stmt = connection.prepareStatement(sql);
+			// setar os valores
+			stmt.setInt(   1, tblivros.getCodlivro());
+			stmt.setString(2, tblivros.getTitulo());
+			stmt.setString(3, tblivros.getAutor());
+			stmt.setString(4, tblivros.getCategoria());
+			stmt.setFloat( 5, tblivros.getValor());
+			stmt.execute();
+			stmt.close();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	
+	
+
+	public static List<TbLivros> find(String categorias) {
+		sql = String.format("SELECT * FROM tblivros WHERE categoria = '' ", categorias);
+				
+		return null;
+	}
+	
+	
+	
+	//Método SELECT
+	public List<TbLivros> getLista() {
+		try {
+			List<TbLivros> tblivro = new ArrayList<TbLivros>();
+			PreparedStatement stmt = this.connection.prepareStatement("select * from tblivros");
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				TbLivros tblivros = new TbLivros();
+				tblivros.setCodlivro(rs.getInt("codlivro"));
+				tblivros.setTitulo(rs.getString("titulo"));
+				tblivros.setCategoria(rs.getString("categoria"));
+				tblivros.setValor(rs.getFloat("valor"));
+				tblivro.add(tblivros);
+			}
+			rs.close();
+			stmt.close();
+			return tblivro;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	/*
+	
+	ublic List<Contato3> getLista() {
+		try {
+			List<Contato3> contatos = new ArrayList<Contato3>();
+			PreparedStatement stmt = this.connection.prepareStatement("select * from contatos");
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				Contato3 contato = new Contato3();
+				contato.setId(rs.getLong("id"));
+				contato.setNome(rs.getString("nome"));
+				contato.setEmail(rs.getString("email"));
+				contato.setEndereco(rs.getString("endereco"));
+				Calendar data = Calendar.getInstance();
+				data.setTime(rs.getDate("dataNascimento"));
+				contato.setDataNascimento(data);
+				contatos.add(contato);
+			}
+			rs.close();
+			stmt.close();
+			return contatos;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	 
+	 
+	*/
+}

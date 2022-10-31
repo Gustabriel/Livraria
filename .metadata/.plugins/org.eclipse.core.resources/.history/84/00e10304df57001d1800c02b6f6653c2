@@ -1,0 +1,67 @@
+package servlets;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.sql.Connection;
+
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import livraria.jdbc.TbCategoria;
+
+/**
+ * Servlet implementation class ListaLivrosPorCategoria
+ */
+@WebServlet("/ListaLivrosPorCategoria")
+public class ListaLivrosPorCategoria extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	
+	private Connection connection;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		PrintWriter out = response.getWriter();
+		out.println("<!DOCTYPE html>");
+		out.println("<html>");
+			out.println("<head>");
+			out.println("<title>Livraria FGE</title>");
+			out.println("</head>");
+			out.println("<body>");
+				out.println("<h1>Listar Livros Por Categoria</h1>");
+				out.println("<br/>");
+				out.println("<form action=''>");
+					out.println("Categorias");
+					out.println("<select name='categorias'>");
+					out.println("<option value='Selecione' disabled selected>Selecione a Categoria</option>");
+					out.println("<option>Arquitetura</option>");
+					out.println("<option>Desgin</option>");
+					out.println("<option>Informática</option>");
+					out.println("<option>Literatura brasileira</option>");
+					out.println("<option>Literatura infantil</option>");
+					out.println("<option>Literatura universal</option>");
+					out.println("<option>Música e arte</option>");
+					out.println("</select>");
+					out.println("<br/>");
+					out.println("<br/>");
+					out.println("<input type='submit' value='Listar'>");
+				out.println("</form>");
+			out.println("</body>");
+		out.println("</html>");
+	}
+	
+
+	
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	}
+
+}

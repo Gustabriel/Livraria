@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Listar Livros</title>
+			<title>Livraria FGE</title>
+		</head>
+			<body>
+				<h1>Listar Livros Por Categoria</h1>
+				<br/>
+				
+				<form action='ListaCategoria' method='POST'>
+					<label for='categorias'>Categorias</label>
+					<select name='categorias' id='categorias'>
+					<option value='Selecione' disabled selected>Selecione a Categoria</option>
+					<option name='categorias' id='categorias' value='Arquitetura'>Arquitetura</option>
+					<option name='categorias' id='categorias' value='Arquitetura'>Desgin</option>
+					<option name='categorias' id='categorias' value='Arquitetura'>Informática</option>
+					<option name='categorias' id='categorias' value='Arquitetura'>Literatura brasileira</option>
+					<option name='categorias' id='categorias' value='Arquitetura'>Literatura infantil</option>
+					<option name='categorias' id='categorias' value='Arquitetura'>Literatura universal</option>
+					<option name='categorias' id='categorias' value='Arquitetura'>Música e arte</option>
+					</select>
+					<br/><br/>
+					<input type='submit' value='Listar'>
+				</form>
+			</body>
+	</html>

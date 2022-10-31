@@ -1,0 +1,57 @@
+package livraria.jdbc;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+public class TbCategoriaDAO {
+	
+	private Connection connection;
+	
+	public TbCategoriaDAO() {
+		// utilizar a classe ConnectionFactory para criar a conexão
+		try {
+			this.connection = new ConnectionFactory().getConnection();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void adicionar(TbCategoria tbcategoria) {
+		// o ponto de interrogação é uma mascara para variavel
+		String sql = "insert into tbcategorias " + "(categoria)" + " values(?)";
+		try {
+			PreparedStatement stmt = connection.prepareStatement(sql);
+			// setar os valores
+			stmt.setString(1, tbcategoria.getCategoria());
+			stmt.execute();
+			stmt.close();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public List<Contato3> getLista() {
+		try {
+			List<Contato3> contatos = new ArrayList<Contato3>();
+			PreparedStatement stmt = this.connection.prepareStatement("select * from contatos");
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				Contato3 contato = new Contato3();
+				contato.setId(rs.getLong("id"));
+				contato.setNome(rs.getString("nome"));
+				contato.setEmail(rs.getString("email"));
+				contato.setEndereco(rs.getString("endereco"));
+				Calendar data = Calendar.getInstance();
+				data.setTime(rs.getDate("dataNascimento"));
+				contato.setDataNascimento(data);
+				contatos.add(contato);
+			}
+			rs.close();
+			stmt.close();
+			return contatos;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+}
